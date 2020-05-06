@@ -2,22 +2,22 @@ Name:           suma-deepsec-formula
 Version:        0.1
 Release:        1%{?dist}
 Summary:        Deep Security Formula for SUSE Manager
-
-License:        GPLv3+
-Url:            https://github.com/S-SYS/%{name}
+Group:          System/Packages
+License:        Apache-2.0
+Url:            https://github.com/s-sys/suma_formulas
 Source0:        %{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
 # This would be better with a macro that just strips "_formula" from %{name}
-%define fname suma-deepsec-formula
+%define fname suma-deepsec
 %define fdir  %{_datadir}/salt-formulas
 
 %description
 Deep Security Formula for SUSE Manager. Sets up Deep Security on the system.
 
 %prep
-%setup -q
+%setup -q -n suma-deepsec
 
 %build
 
@@ -40,9 +40,7 @@ cp -R metadata/* %{buildroot}%{fdir}/metadata/%{fname}
 %dir %attr(0755, root, salt) %{fdir}/states
 %dir %attr(0755, root, salt) %{fdir}/metadata
 
-%attr(0755, root, salt) %{fdir}/states/%{fname}
-%attr(0755, root, salt) %{fdir}/metadata/%{fname}
+%attr(0644, root, salt) %{fdir}/states/%{fname}
+%attr(0644, root, salt) %{fdir}/metadata/%{fname}
 
 %changelog
-* Wed Apr  8 2020 Cleber Paiva de Souza <cleber@ssys.com.br>
-- First version

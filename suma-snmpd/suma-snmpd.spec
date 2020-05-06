@@ -1,10 +1,10 @@
-Name:           suma-snmpd
+Name:           suma-snmpd-formula
 Version:        0.1
 Release:        1%{?dist}
 Summary:        SNMP Service Formula for SUSE Manager
-
-License:        GPLv3+
-Url:            https://github.com/S-SYS/%{name}
+Group:          System/Packages
+License:        Apache-2.0
+Url:            https://github.com/s-sys/suma_formulas/%{name}
 Source0:        %{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
@@ -17,7 +17,7 @@ BuildArch:      noarch
 SNMP Service Formula for SUSE Manager.
 
 %prep
-%setup -q
+%setup -q -n suma-snmpd
 
 %build
 
@@ -40,9 +40,7 @@ cp -R metadata/* %{buildroot}%{fdir}/metadata/%{fname}
 %dir %attr(0755, root, salt) %{fdir}/states
 %dir %attr(0755, root, salt) %{fdir}/metadata
 
-%attr(0755, root, salt) %{fdir}/states/%{fname}
-%attr(0755, root, salt) %{fdir}/metadata/%{fname}
+%attr(0644, root, salt) %{fdir}/states/%{fname}
+%attr(0644, root, salt) %{fdir}/metadata/%{fname}
 
 %changelog
-* Fri Apr 24 2020 Cleber Paiva de Souza <cleber@ssys.com.br>
-- First version

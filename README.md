@@ -12,3 +12,7 @@ https://www.suse.com/media/presentation/TUT1053_Simplifying_Pillar_Management_wi
 
 https://documentation.suse.com/external-tree/en-us/suma/4.0/suse-manager/salt/formulas-custom.html
 
+# RPM Files
+
+https://build.opensuse.org/project/show/home:cleberps:suma_formulas
+
