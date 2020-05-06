@@ -1,0 +1,4 @@
+description:
+  Sudoers Formula for SUSE Manager. Sets up configuration in sudoers include file.
+group: SAP
+after: 

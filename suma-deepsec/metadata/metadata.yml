@@ -1,0 +1,4 @@
+description:
+  Deep Security Formula for SUSE Manager. Install Deep Security Agent on SUSE systems.
+group: SAP
+after: 

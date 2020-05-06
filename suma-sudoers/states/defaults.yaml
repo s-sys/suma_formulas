@@ -1,0 +1,6 @@
+suma_sudoers:
+  sudoers_types:
+    - checkbox_user_alias: False
+    - checkbox_command_alias: False
+    - checkbox_host_alias: False
+    - checkbox_runas_alias: False

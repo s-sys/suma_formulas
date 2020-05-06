@@ -1,0 +1,209 @@
+suma_sudoers:
+  $name: "Sudoers"
+  $type: "group"
+  $scope: "system"
+  
+  # https://www.sudo.ws/man/1.7.10/sudoers.man.html
+  sudoers_types:
+    $type: group
+    $scope: system
+    $name: "Sudoers Aliases Configuration"
+    
+    checkbox_user_alias:
+      $type: boolean
+      $name: "User aliases"
+      $default: false
+      $help: "Enable/Disable user aliases"
+  
+    checkbox_command_alias:
+      $type: boolean
+      $name: "Command aliases"
+      $default: false
+      $help: "Enable/Disable command aliases"
+  
+    checkbox_host_alias:
+      $type: boolean
+      $name: "Host aliases"
+      $default: false
+      $help: "Enable/Disable host aliases"
+  
+    checkbox_runas_alias:
+      $type: boolean
+      $name: "RunAs aliases"
+      $default: false
+      $help: "Enable/Disable runas aliases"
+  
+    $default:
+      - checkbox_user_alias: false
+      - checkbox_command_alias: false
+      - checkbox_host_alias: false
+      - checkbox_runas_alias: false
+  
+  user_alias:
+    $name: "User Aliases"
+    $type: edit-group
+    $scope: system
+    $minItems: 0
+    $itemName: "User Alias ${name}"
+    $visible: "formValues.suma_sudoers.sudoers_types.checkbox_user_alias"
+  
+    $prototype:
+      name:
+        $name: "User alias name"
+        $type: text
+        $default: ""
+        $required: true
+        $match: "^[A-Z][A-Z0-9_]+$"
+  
+      users:
+        $name: "List of usernames and groups. Groups are prefixed by % and exclusions by !."
+        $type: edit-group
+        $scope: system
+        $minItems: 1
+   
+        $prototype:
+          user:
+            $name: "User / Group"
+            $type: text
+            $default: ""
+            $required: true
+            $match: "^[#%+:!]{0,3}([0-9a-zA-Z_-\".@ ])+$"
+
+  command_alias:
+    $name: "Command Aliases"
+    $type: edit-group
+    $scope: system
+    $minItems: 0
+    $itemName: "Command Alias ${name}"
+    $visible: "formValues.suma_sudoers.sudoers_types.checkbox_command_alias"
+
+    $prototype:
+      name:
+        $name: "Command alias name"
+        $type: text
+        $default: ""
+        $required: true
+        $match: "^[A-Z][A-Z0-9_]+$"
+  
+      commands:
+        $name: "List of commands."
+        $type: edit-group
+        $scope: system
+        $minItems: 1
+   
+        $prototype:
+          command:
+            $name: "Command"
+            $type: text
+            $default: ""
+            $required: true
+            $match: "^[!\\/]{0,1}([0-9a-zA-Z_.@,:\\*\\=\\/\\-\" ])+$"
+
+  host_alias:
+    $name: "Host Aliases"
+    $type: edit-group
+    $scope: system
+    $minItems: 0
+    $itemName: "Host Alias ${name}"
+    $visible: "formValues.suma_sudoers.sudoers_types.checkbox_host_alias"
+
+    $prototype:
+      name:
+        $name: "Host alias name"
+        $type: text
+        $default: ""
+        $required: true
+        $match: "^[A-Z][A-Z0-9_]+$"
+  
+      hosts:
+        $name: "List of hosts / networks."
+        $type: edit-group
+        $scope: system
+        $minItems: 1
+   
+        $prototype:
+          host:
+            $name: "Host"
+            $type: text
+            $default: ""
+            $required: true
+            $match: "^[+!]?([0-9a-zA-Z_.\\/\\-\"])+$"
+
+  runas_alias:
+    $name: "RunAs Aliases"
+    $type: edit-group
+    $scope: system
+    $minItems: 0
+    $itemName: "RunAs Alias ${name}"
+    $visible: "formValues.suma_sudoers.sudoers_types.checkbox_runas_alias"
+
+    $prototype:
+      name:
+        $name: "RunAs alias name"
+        $type: text
+        $default: ""
+        $required: true
+        $match: "^[A-Z][A-Z0-9_]+$"
+
+      runases:
+        $name: "List of RunAshosts / networks."
+        $type: edit-group
+        $scope: system
+        $minItems: 1
+
+        $prototype:
+          runas:
+            $name: "User / group"
+            $type: text
+            $default: ""
+            $required: true
+            $match: "^[#%+:!]{0,3}([0-9a-zA-Z_-\".@ ])+$"
+
+  user_rules:
+    $name: "Sudo Rules"
+    $type: edit-group
+    $scope: system
+    $minItems: 0
+    $itemName: "Sudo Rule ${user}"
+
+    $prototype:
+      user:
+        $name: "User / Group"
+        $type: text
+        $default: ""
+        $required: true
+        $match: "^[#%+:!]{0,3}([0-9a-zA-Z_-\".@ ])+$"
+
+      host:
+        $name: "Host"
+        $type: text
+        $default: "ALL"
+        $required: true
+        $match: "^[A-Z][A-Z0-9_]+$"
+
+      run:
+        $name: "RunAs"
+        $type: text
+        $default: "ALL"
+        $required: true
+        $match: "^[A-Z][A-Z0-9_]+$"
+
+      commands:
+        $name: "List of commands"
+        $type: edit-group
+        $scope: system
+        $minItems: 1
+
+        $prototype:
+          command:
+            $name: "Command"
+            $type: text
+            $default: ""
+            $required: true
+            $match: "^[!\\/]{0,1}([0-9a-zA-Z_.@,:\\*\\=\\/\\-\" ])+$"
+
+      password:
+        $name: "Require password"
+        $type: boolean
+        $default: false
+

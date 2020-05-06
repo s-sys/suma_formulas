@@ -1,0 +1,62 @@
+suma_snmpd:
+  $name: "SNMP Service"
+  $type: "group"
+  $scope: "system"
+  
+  install:
+    $type: boolean
+    $default: True
+    $require: False
+    $name: "Install required packages"
+    $help: "Install required packages for SNMP Service"
+
+  identity:
+    $type: group
+    $scope: system
+    $name: "Options"
+
+    location:
+      $name: "System location"
+      $type: text
+      $default: "Server Room"
+      $required: true
+      $match: "^[a-zA-Z]+([0-9a-zA-Z_.-@ ])+$"
+
+    contact:
+      $name: "Contact"
+      $type: text
+      $default: "Sysadmin"
+      $required: true
+      $match: "^[a-zA-Z]+([0-9a-zA-Z_.-@ ])+$"
+
+    email:
+      $name: "Email"
+      $type: text
+      $default: "root@localhost"
+      $required: true
+      $match: "^[a-zA-Z]+([0-9a-zA-Z_.-@])+$"
+
+  access:
+    $type: group
+    $scope: system
+    $name: "Access and Security"
+
+    root_oid:
+      $name: "Root OID for view"
+      $type: text
+      $default: ".1"
+      $required: true
+      $match: "^[0-9a-zA-Z.]+([0-9a-zA-Z_.-])+$"
+
+    community:
+      $name: "Community name"
+      $type: text
+      $default: "public"
+      $required: true
+
+    network:
+      $name: "Network allowed to access"
+      $type: text
+      $default: "127.0.0.1"
+      $required: true
+

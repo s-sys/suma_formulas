@@ -1,0 +1,5 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{% import_yaml "suma-sudoers/defaults.yaml" as defaults %}
+{% set suma_sudoers = salt['pillar.get']('suma_sudoers', default=defaults.suma_sudoers, merge=True) %}
